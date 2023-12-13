@@ -26,3 +26,8 @@ variable "AWS_SECRET_ACCESS_KEY" {
   description = "A chave de acesso secreta da AWS"
   type        = string
 }
+
+variable "AWS_ACCESS_KEY_ID" {
+  description = "ID da AWS"
+  type        = string
+}
