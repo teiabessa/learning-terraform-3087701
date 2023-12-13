@@ -22,3 +22,7 @@ resource "aws_instance" "web" {
     Name = "HelloWorld"
   }
 }
+variable "AWS_SECRET_ACCESS_KEY" {
+  description = "A chave de acesso secreta da AWS"
+  type        = string
+}
