@@ -14,17 +14,28 @@ data "aws_ami" "app_ami" {
   owners = ["979382823631"] # Bitnami
 }
 
-resource "aws_instance" "web" {
+resource "aws_instance" "blog" {
   ami           = data.aws_ami.app_ami.id
-  instance_type = "t3.nano"
+  instance_type = var.instace_type
 
   tags = {
-    Name = "HelloWorld"
+    Name = "Learning Terraform"
   }
 }
-variable "AWS_SECRET_ACCESS_KEY" {
-  description = "A chave de acesso secreta da AWS"
-  type        = string
+resource "aws_security_group" "blog" {
+  name          = "blog"
+  description   = "Allow http and https in. Allow everything out"
+  vpc_id        = data.aws_vpc.default_id
+}
+
+resource "aws_security_group_rule" "blog_http_in" {
+  type= "ingress"
+  from_port          = 80
+  to_port            =80
+  protocol           = "tcp"
+  cidr_bloks         =["0.0.0.0/0"]
+
+  security_group_id   = aws_security_group_blog.id
 }
 
 variable "AWS_ACCESS_KEY_ID" {
