@@ -41,7 +41,7 @@ resource "aws_security_group_rule" "blog_http_in" {
   protocol           = "tcp"
   cidr_bloks         =["0.0.0.0/0"]
 
-  security_group_id   = aws_security_group_blog.id
+  security_group_id   = aws_security_group.blog.id
 }
 #https protocol
 resource "aws_security_group_rule" "blog_https_in" {
@@ -51,7 +51,7 @@ resource "aws_security_group_rule" "blog_https_in" {
   protocol           = "tcp"
   cidr_bloks         =["0.0.0.0/0"]
 
-  security_group_id   = aws_security_group_blog.id
+  security_group_id   = aws_security_group.blog.id
 }
 
 
@@ -62,7 +62,7 @@ resource "aws_security_group_rule" "blog_everything_out" {
   protocol           = "-1"
   cidr_bloks         =["0.0.0.0/0"]
 
-  security_group_id   = aws_security_group_blog.id
+  security_group_id   = aws_security_group.blog.id
 }
 
 variable "AWS_ACCESS_KEY_ID" {
