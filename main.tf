@@ -37,7 +37,7 @@ module "blog_sg" {
   ingress_cidr_blocks = ["0.0.0.0/0"]
 
   #all http protocol
-  egress_rules = ["all", "all"]
+  egress_rules = [ "all-all" ]
   egress_cidr_blocks = ["0.0.0.0/0"]
 }
 
