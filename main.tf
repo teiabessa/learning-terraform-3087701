@@ -16,6 +16,24 @@ data "aws_ami" "app_ami" {
 data "aws_vpc" "default"{
     default = true
  }
+
+
+module "vpc" {
+  source = "terraform-aws-modules/vpc/aws"
+
+  name = "my-vpc"
+  cidr = "10.0.0.0/16"
+  #zone brasil - sp
+  azs             = ["sa-east-1a", "sa-east-1b", "sa-east-1c"]
+  
+  public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+  }
+}
+
 resource "aws_instance" "blog" {
   ami           = data.aws_ami.app_ami.id
   instance_type = var.instance_type
@@ -26,6 +44,7 @@ resource "aws_instance" "blog" {
     Name = "Learning Terraform"
   }
 }
+
 
 module "blog_sg" {
   source  = "terraform-aws-modules/security-group/aws"
